@@ -1,0 +1,147 @@
+#include<bits/stdc++.h>
+
+#define all(hole) sort(hole.begin(), hole.end())
+#define rall(hole) sort(hole.rbegin(), hole.rend())
+
+
+using namespace std;
+int main()
+{
+    vector<int>hole, process,best_v, first_v, worst_v;
+    int h;
+    cout<<"Enter the number of holes :";
+    cin>>h;
+    for( int i = 1; i <= h; i++)
+    {
+        int x;
+        cin>>x;
+        hole.push_back(x);
+    }
+    first_v = hole;
+    all(hole);
+    cout<<"Enter the number of process:";
+    cin>>h;
+    for( int i = 1; i <= h; i++)
+    {
+        int x;
+        cin>>x;
+        process.push_back(x);
+    }
+    best_v= hole, worst_v= hole;
+    rall(worst_v);
+    for(int i =  0 ; i < process.size(); i++)
+    {
+        cout<<"Process no: "<<i + 1<<endl;
+        ///first
+        int f = 0;
+        for( int j = 0 ; j < first_v.size(); j++)
+        {
+
+            if(process[i] <= first_v[j])
+            {
+                cout<<"First Fit\n";
+                cout<<i + 1<<" no process used "<<first_v[j]<<"  hole and the new hole is "<<first_v[j] - process[i]<<endl;
+                f = 1;
+                first_v[j] = first_v[j] - process[i];
+                cout<<"available hole: \n";
+                for( int k = 0 ; k< first_v.size(); k++)
+                {
+                    if(first_v[k])
+                        cout<<first_v[k]<<endl;
+                }
+                break;
+            }
+
+        }
+        if(!f)
+        {
+            cout<<"first error\n";
+        }
+        cout<<'\n';
+    }
+
+
+    ///Best
+    for(int i =  0 ; i < process.size(); i++)
+    {
+        cout<<"Process no: "<<i + 1<<endl;
+        int f = 0;
+        for( int j = 0 ; j < best_v.size(); j++)
+        {
+
+            if(process[i] <= best_v[j])
+            {
+                cout<<"Best Fit\n";
+                cout<<i + 1<<" no process used "<<best_v[j]<<"  hole and the new hole is "<<best_v[j] - process[i]<<endl;
+                f = 1;
+                best_v[j] = best_v[j] - process[i];
+                all(best_v);
+                cout<<"available hole: \n";
+
+                for( int k = 0 ; k< best_v.size(); k++)
+                {
+                    if(best_v[k])
+                        cout<<best_v[k]<<endl;
+                }
+                break;
+            }
+
+        }
+        if(!f)
+        {
+            cout<<"Best fit error\n";
+        }
+        cout<<'\n';
+    }
+
+
+    ///worst
+    for(int i =  0 ; i < process.size(); i++)
+    {
+        cout<<"Process no: "<<i + 1<<endl;
+        int f = 0;
+        for( int j = 0 ; j < worst_v.size(); j++)
+        {
+
+            if(process[i] <= worst_v[j])
+            {
+                cout<<"worst Fit\n";
+                cout<<i + 1<<" no process used "<<worst_v[j]<<"  hole and the new hole is "<<worst_v[j] - process[i]<<endl;
+                f = 1;
+                worst_v[j] = worst_v[j] - process[i];
+                rall(worst_v);
+                cout<<"available hole: \n";
+
+                for( int k = 0 ; k< worst_v.size(); k++)
+                {
+                    if(worst_v[k])
+                        cout<<worst_v[k]<<endl;
+                }
+                break;
+            }
+
+        }
+        if(!f)
+        {
+            cout<<" Worst fit error\n";
+        }
+        cout<<'\n';
+    }
+
+
+}
+
+/*
+Test case
+
+5
+100
+500
+200
+300
+600
+3
+212
+417
+112
+*/
