@@ -1,0 +1,41 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+   cout<<"Input frame size: ";
+   int n;
+   cin>>n;
+   map<int , int>m;
+   std::queue<int>q ;
+   cout<<"input string size:";
+   int sz;
+   int ans = 0;
+   cin>>sz;
+   int arr[sz + 2];
+   for( int i = 1 ; i<= sz;i++)
+   cin>>arr[i];
+   for( int i = 1 ; i <= sz;i++)
+   {
+       
+       int x;
+       x = arr[i];
+       if(m[x])
+       continue;
+       else 
+       {
+           ++ans;
+           if(q.size() == n)
+           {
+               m[q.front()] = 0;
+               q.pop();
+           }
+            m[x] = 1;
+               q.push(x);
+           
+       }
+   }
+
+       cout<<"Fault size = "<<ans<<endl;
+    return 0;
+}
